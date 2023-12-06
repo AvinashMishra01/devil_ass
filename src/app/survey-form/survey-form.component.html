@@ -1,0 +1,117 @@
+<div class="container, form">
+    <div class="surveyForm">
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-5"> <b>Name</b></div>
+            </div>
+            <div class="row">
+                <div class="col-12"> <input class="form-group" type="text"  placeholder="Name" [(ngModel)]="name"
+                        required> </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-5"><b>Email</b></div>
+            </div>
+            <div class="row">
+                <div class="col-12"> <input class="form-group" type="email"  placeholder="Email" [(ngModel)]="email1"
+                        required> </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-5"><b>Gender</b></div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="rating">
+                        <input type="radio" name="rating" id="rating-1" value="Male" [(ngModel)]="gender">
+                        <label for="rating-1">Male</label>
+                        <input type="radio" name="rating" id="rating-2" value="Female" [(ngModel)]="gender">
+                        <label for="rating-2">Female</label>
+                        <input type="radio" name="rating" id="rating-3" value="Other" [(ngModel)]="gender">
+                        <label for="rating-3">Other</label>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-5"><b>Language</b> </div>
+            </div>
+            <div class="row">
+                <div class="col-12, checkboxes">
+                    <div *ngFor="let email of emails; let i=index">                
+                        <input type="checkbox" [(ngModel)]="selectedEmailIs[i]"/> {{email.subjects}}                    
+                     </div>
+                </div>
+            </div>
+
+        </div>
+ <br>
+
+
+
+        <div class="form-group">
+            <label for="category"><b>Category</b> </label>
+            <select name="category" id="category" [(ngModel)]="category" >
+                <option *ngFor="let cat of categorys; let i= index" [value]="i">{{cat.catName}}</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12 text-center"> <button type="button" class="btn btn-outline-primary" (click)="submitForm()"
+                    >Submit</button></div>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+ 
+   <div class="container">
+<div class="table-responsive mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sr.No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Emails</th>
+          <th>Category</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td>{{ i+1 }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email1 }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.emails.join(', ') }}</td>
+          <td>{{ categorys[user.category]?.catName }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editUser(user)">Edit</button> &nbsp;&nbsp;
+            <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">Delete</button>
+          </td>
+        </tr>
+            </tbody>
+         </table>
+      </div>
+    </div>
+ </div>
+
+
+
+<router-outlet></router-outlet>
